@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ template "sinch.cc2022.m3uatest.server.server.fullname" . }}
+      app.kubernetes.io/name: {{ template "sinch.cc2022.m3uatest.server.fullname" . }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
