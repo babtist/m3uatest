@@ -16,7 +16,13 @@ builds:
     id: m3uaserver
     main: ./cmd/m3uaserver  
     binary: m3uaserver
-
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    id: m3uaclient
+    main: ./cmd/m3uaclient 
+    binary: m3uaclient
 release:
   disable: true
 
@@ -28,4 +34,11 @@ dockers:
     ids:
     - m3uaserver
     skip_push: false
+  - image_templates: [ "571908524012.dkr.ecr.eu-north-1.amazonaws.com/babtist/m3uaclient:{{ .Tag }}"]
+    dockerfile: docker/m3uaclient/Dockerfile
+    goos: linux
+    goarch: amd64
+    ids:
+    - m3uaclient
+    skip_push: false    
   

@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sinch.cc2022.m3uatest.server.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "sinch.cc2022.m3uatest.server.server.fullname" . }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+{{ include "sinch.cc2022.m3uatest.server.labels" . | indent 8 }}
+    spec:
+      imagePullSecrets:
+      - name: {{ .Values.imageCredentials.registry.pullSecret }}
+      containers:
+        - name: m3uatest
+          image: {{ template "sinch.cc2022.m3uatest.registryUrl" . }}/{{ .Values.imageCredentials.repoPath }}/{{ .Values.images.server.name }}:{{ tpl .Values.images.server.tag . }}
+          imagePullPolicy: {{ .Values.imageCredentials.registry.imagePullPolicy }}
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+            - containerPort: 2905
+              name: sctp
+              protocol: SCTP  
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+         
+      

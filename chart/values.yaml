@@ -9,9 +9,12 @@ imageCredentials:
 
 
 images:
-  m3uatest:
+  server:
     name: m3uaserver
-    tag: 0.0.1-beta6
+    tag: "{{ .Chart.Version }}"  
+  client:
+    name: m3uaclient
+    tag: "{{ .Chart.Version }}"  
 
 
 replicaCount: 3

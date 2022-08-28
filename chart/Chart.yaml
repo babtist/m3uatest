@@ -1,4 +1,4 @@
 apiVersion: v1
 name: m3uatest
-version: 0.0.1-beta6
+version: 0.0.1-beta7
 description: Helm chart for deploying CodeCamp 2022 demo service
