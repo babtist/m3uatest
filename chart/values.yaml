@@ -10,8 +10,8 @@ imageCredentials:
 
 images:
   m3uatest:
-    name: m3uatest
-    tag: 0.0.1-beta4
+    name: m3uaserver
+    tag: 0.0.1-beta5
 
 
 replicaCount: 3
