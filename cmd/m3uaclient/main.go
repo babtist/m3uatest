@@ -85,6 +85,7 @@ func main() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
+	log.Printf("Trying to connect to %s", raddr.IPAddrs)
 
 	conn, err := m3ua.Dial(ctx, "m3ua", nil, raddr, config)
 	if err != nil {
