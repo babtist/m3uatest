@@ -3,7 +3,10 @@ kind: Deployment
 metadata:
   name: {{ include "sinch.cc2022.m3uatest.client.fullname" . }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ template "sinch.cc2022.m3uatest.client.fullname" . }}
+  replicas: {{ .Values.replicaCount.client }}
   template:
     metadata:
       labels:
@@ -12,9 +15,14 @@ spec:
       imagePullSecrets:
       - name: {{ .Values.imageCredentials.registry.pullSecret }}
       containers:
-        - name: m3uatest
+        - name: client
           image: {{ template "sinch.cc2022.m3uatest.registryUrl" . }}/{{ .Values.imageCredentials.repoPath }}/{{ .Values.images.client.name }}:{{ tpl .Values.images.client.tag . }}
           imagePullPolicy: {{ .Values.imageCredentials.registry.imagePullPolicy }}
+          env:
+          - name: REMOTE_IP
+            value: "{{ tpl .Values.client.config.remoteHost . }}"
+          - name: REMOTE_PORT
+            value: "{{ tpl .Values.client.config.remotePort . }}"  
           ports:
             - containerPort: 8080
               name: http

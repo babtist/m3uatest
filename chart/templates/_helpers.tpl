@@ -70,6 +70,13 @@ Selector labels for server
 app.kubernetes.io/name: {{ include "sinch.cc2022.m3uatest.server.fullname" . }}
 {{- end -}}
 
+{/*
+Selector labels for client
+*/}}
+{{- define "sinch.cc2022.m3uatest.client.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "sinch.cc2022.m3uatest.server.fullname" . }}
+{{- end -}}
+
 
 {{/*
 Create image registry url
