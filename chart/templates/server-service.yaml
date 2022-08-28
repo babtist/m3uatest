@@ -13,6 +13,7 @@ spec:
       targetPort: http
     - name: sctp
       port: 2905
-      targetPort: http  
+      protocol: SCTP
+      targetPort: sctp  
   type: ClusterIP
 
