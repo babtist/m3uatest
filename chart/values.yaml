@@ -11,7 +11,7 @@ imageCredentials:
 images:
   m3uatest:
     name: m3uatest
-    tag: 0.0.1-beta3
+    tag: 0.0.1-beta4
 
 
 replicaCount: 3
