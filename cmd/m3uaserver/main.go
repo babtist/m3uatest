@@ -16,8 +16,10 @@ import (
 
 	"github.com/wmnsk/go-m3ua/messages/params"
 
+	"github.com/gin-gonic/gin"
 	"github.com/ishidawataru/sctp"
 	"github.com/wmnsk/go-m3ua"
+	"net/http"
 )
 
 func serve(conn *m3ua.Conn) {
@@ -87,6 +89,15 @@ func main() {
 	ctx := context.Background()
 	ctx, cancel := context.WithCancel(ctx)
 	defer cancel()
+
+	// Create a simple HTTP server for Kubernetes health checks
+	router := gin.Default()
+	router.GET("/health", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"Status": "OK",
+		})
+	})
+	go router.Run()
 
 	for {
 		conn, err := listener.Accept(ctx)
