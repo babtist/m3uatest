@@ -90,6 +90,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("Failed to dial M3UA: %s", err)
 	}
+	log.Println("Connected to server")
 	defer conn.Close()
 
 	// Create a simple HTTP server for Kubernetes health checks

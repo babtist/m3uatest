@@ -45,7 +45,7 @@ livenessProbe:
   # Minimum consecutive successes for the probe to be considered successful after having failed.
   successThreshold: 1
 
- client:
-   config: 
-     remoteHost: "{{ include \"sinch.cc2022.m3uatest.server.fullname\" . }}"
-     remotePort: "2905"
+client:
+  config: 
+    remoteHost: "{{ include \"sinch.cc2022.m3uatest.server.fullname\" . }}"
+    remotePort: "2905"
