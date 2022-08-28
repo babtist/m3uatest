@@ -12,6 +12,7 @@ import (
 	"encoding/hex"
 	"flag"
 	"log"
+	"os"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -24,7 +25,7 @@ import (
 
 func main() {
 	var (
-		addr  = flag.String("addr", os.Getenv("REMOTE_IP"))+":"+os.Getenv("REMOTE_PORT"), "Remote IP and Port to connect to.")
+		addr  = flag.String("addr", os.Getenv("REMOTE_IP")+":"+os.Getenv("REMOTE_PORT"), "Remote IP and Port to connect to.")
 		data  = flag.String("data", "deadbeef", "Payload to send on M3UA in hex stream format.")
 		hbInt = flag.Duration("hb-interval", 0, "Interval for M3UA BEAT. Put 0 to disable")
 	)
