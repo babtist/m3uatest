@@ -22,7 +22,7 @@ release:
 
 dockers:
   - image_templates: [ "571908524012.dkr.ecr.eu-north-1.amazonaws.com/babtist/m3uaserver:{{ .Tag }}"]
-    dockerfile: docker/Dockerfile
+    dockerfile: docker/m3uaserver/Dockerfile
     goos: linux
     goarch: amd64
     ids:
